@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Kategorije</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="isLoading" class="ion-justify-content-center">
+      <ion-col size='6' size-md='5' class="ion-text-center">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!isLoading && loadedCategories.length > 0" class="ion-justify-content-center">
+      <ion-col size='6' size-md='5' *ngFor="let category of loadedCategories">
+        <ion-card class="ion-no-margin ion-text-center ion-padding"
+          [routerLink]="['/','categories',category.category_id]">
+          <img [src]="category.image" [alt]="category.name" />
+
+          <ion-card-header class="ion-no-padding">
+            <ion-card-subtitle>{{ category.name }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!isLoading && loadedCategories.length < 1" class="ion-justify-content-center">
+      <ion-col size='6' size-md='5'>
+        <p>Trenutno nema kategorija proizvoda</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BMTechnology2</string>
+    <string name="title_activity_main">bmtechnology</string>
+    <string name="package_name">com.bmtechnology</string>
+    <string name="custom_url_scheme">com.bmtechnology</string>
+</resources>

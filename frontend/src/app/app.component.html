@@ -1,0 +1,63 @@
+<ion-app>
+
+  <ion-menu side="start" content-id="content">
+    <ion-header>
+      <img src="assets/img/navigation_header.png" alt="navigation_header">
+
+      <ion-toolbar *ngIf="isUserLoaded" class="ion-padding-start">
+        <p>{{ user.firstName }} {{user.lastName}}</p>
+        <p>{{ user.email }}</p>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink='/home'>
+            <ion-icon name="home" slot="start" color='medium'></ion-icon>
+            <ion-label>Početna</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink='/categories'>
+            <ion-icon name="albums" slot="start" color='medium'></ion-icon>
+            <ion-label>Kategorije</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink='/home/tabs/cart'>
+            <ion-icon name="cart" slot="start" color='medium'></ion-icon>
+            <ion-label>Korpa</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/orders">
+            <ion-icon name="timer" slot="start" color='medium'></ion-icon>
+            <ion-label>Istorija kupovine</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="full" routerLink="/account">
+            <ion-icon name="person-circle" slot="start" color='medium'></ion-icon>
+            <ion-label>Moj nalog</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)='onLogout()' button>
+            <ion-icon name="exit" slot="start" color='medium'></ion-icon>
+            <ion-label>Odjavite se</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-router-outlet id="content"></ion-router-outlet>
+</ion-app>

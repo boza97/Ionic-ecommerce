@@ -1,0 +1,14 @@
+ion-item {
+  --inner-padding-end: 0px;
+  --padding-start: 0px;
+  --highlight-color-valid: var(--ion-color-primary);
+}
+
+.price-color{
+  color: #34d9eb !important;
+}
+
+.justify-end{
+  display: flex !important;
+  justify-content: flex-end !important;
+}

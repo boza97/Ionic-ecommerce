@@ -1,0 +1,7 @@
+{
+  "name": "bmtechnology",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

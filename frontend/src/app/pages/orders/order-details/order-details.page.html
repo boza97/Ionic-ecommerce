@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isLoading ? 'Učitavanje...' : 'Narudžbina br.' + order.order_id }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <ion-grid *ngIf="!isLoading && order.order_items.length > 0">
+    <ion-row class="ion-justify-content-center">
+      <ion-col *ngFor="let orderItem of order.order_items" size='12' size-md="5">
+        <ion-card class="ion-no-margin">
+          <ion-card-content class="ion-no-padding">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size='4'>
+                  <img [src]="orderItem.product.image" />
+                </ion-col>
+
+                <ion-col size='8' class="pl-15 ion-align-self-center">
+                  <div class="ion-text-left">
+                    <h2 class="font-weight-600">{{ orderItem.product.title }}</h2>
+                    <ion-label>
+                      <p><b>Količina: </b>{{ orderItem.quantity }}</p>
+                      <p><b>Ukupna cena: </b><span class="price-color">{{ (orderItem.quantity * orderItem.product.price).toFixed(2) }} RSD</span></p>
+                    </ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

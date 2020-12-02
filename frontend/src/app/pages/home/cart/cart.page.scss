@@ -1,0 +1,23 @@
+ion-item {
+  --inner-padding-end: 0px;
+}
+
+.tertiary-contrast {
+  color: var( --ion-color-tertiary-contrast);
+}
+
+.quantity-button{
+  height: auto;
+  width: 2.7rem;
+}
+
+.wraper-quantity{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amount-size{
+  font-size: 14px;
+}
+

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/tabs/featured"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalji</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding" size-md="6" offset-md="3">
+        <ion-card class="ion-no-margin">
+          <div class="ion-text-center">
+            <img [src]="product.image" />
+          </div>
+
+          <ion-card-header>
+            <ion-card-title>{{ product.title }}</ion-card-title>
+            <ion-card-subtitle>Cena: {{ product.price.toFixed(2) }} RSD</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>Specifikacije:</p>
+            <p [innerHTML] = "product.description"></p>
+          </ion-card-content>
+
+          <div class="ion-text-center">
+            <ion-button fill="solid" color="tertiary" (click)="onAddToCart()">Dodaj u korpu</ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

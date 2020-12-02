@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Početna</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngIf="!isLoading && loadedProducts.length != 0" class="ion-text-center" lines="none">
+    <ion-label>
+      <h1>Izdvajamo iz ponude</h1>
+    </ion-label>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row *ngIf="isLoading" class="ion-justify-content-center">
+      <ion-col class="ion-text-center" size='12' size-md="5">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!isLoading && loadedProducts.length != 0" class="ion-justify-content-center">
+      <ion-col *ngFor="let product of loadedProducts" size='12' size-md="5">
+        <ion-card class="ion-no-margin" (click)="onDetails(product.product_id)">
+          <ion-card-content class="ion-no-padding">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size='4'>
+                  <img [src]="product.image" />
+                </ion-col>
+
+                <ion-col size='6' class="pl-15 ion-align-self-center">
+                  <div class="ion-text-left">
+                    <h2 class="font-weight-600">{{ product.title }}</h2>
+                    <ion-label>
+                      <p>Opis: {{ product.description | replaceBrTag | slice: 0:60 }} ...</p>
+                      <p>Cena: <span class="price-color">{{ product.price.toFixed(2) }} RSD</span></p>
+                    </ion-label>
+                  </div>
+                </ion-col>
+
+                <ion-col size='2' class="ion-text-right ion-align-self-center">
+                  <ion-button fill='clear' color='secondary' (click)="onAddToCart(product); $event.stopPropagation()">
+                    <ion-icon name="add"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!isLoading && loadedProducts.length == 0">
+      <ion-col class="ion-text-center">
+        <p>Trenutno nema izdvojenih proizvoda</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

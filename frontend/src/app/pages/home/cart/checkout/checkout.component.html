@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Narudžbina</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()">
+        <ion-icon name='close'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col size-sm='6' offset-sm='3' class="ion-text-center">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form *ngIf="!isLoading && form" [formGroup]="form" (ngSubmit)="onPlaceOrder()">
+    <ion-grid>
+      <ion-row class="ion-no-padding">
+        <ion-col size-sm='10' offset-sm='1'>
+          <ion-list>
+            <ion-item>
+              <ion-label position='floating'>Grad</ion-label>
+              <ion-input type='text' formControlName="city"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="form.get('city').invalid && form.get('city').touched" lines='none'>
+              <ion-label color='danger'>Naziv grada mora sadržati samo slova.</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-no-padding">
+        <ion-col size-sm='10' offset-sm='1'>
+          <ion-list>
+            <ion-item>
+              <ion-label position='floating'>Poštanski broj</ion-label>
+              <ion-input type='number' formControlName='cityCode'>
+              </ion-input>
+            </ion-item>
+            <ion-item *ngIf="form.get('cityCode').invalid && form.get('cityCode').touched" lines='none'>
+              <ion-label class="ion-text-wrap" color='danger'>Poštanski broj mora sadržati tačno 5 cifara.</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-no-padding">
+        <ion-col size-sm='10' offset-sm='1'>
+          <ion-list>
+            <ion-item>
+              <ion-label position='floating'>Kontakt osoba</ion-label>
+              <ion-input type='text' formControlName="contactName"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="form.get('contactName').invalid && form.get('contactName').touched" lines='none'>
+              <ion-label class="ion-text-wrap" color='danger'>Naziv kontakt osobe mora sadržati samo slova.</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-no-padding">
+        <ion-col size-sm='10' offset-sm='1'>
+          <ion-list>
+            <ion-item>
+              <ion-label position='floating'>Adresa</ion-label>
+              <ion-input type='text' formControlName='address'></ion-input>
+            </ion-item>
+            <ion-item *ngIf="form.get('address').invalid && form.get('address').touched" lines='none'>
+              <ion-label color='danger'>Adresa je obavezna.</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-no-padding">
+        <ion-col size-sm='10' offset-sm='1'>
+          <ion-list>
+            <ion-item lines='none'>
+              <ion-label position='fixed'>Telefon</ion-label>
+              <ion-input type='text' placeholder='06#/#######' formControlName='mobileNumber'></ion-input>
+            </ion-item>
+            <ion-item *ngIf="form.get('mobileNumber').invalid && form.get('mobileNumber').touched" lines='none'>
+              <ion-label color='danger'>Broj telefona nije u zadatom formatu.</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-end">
+        <ion-col size='8' size-sm='6' class="justify-end ion-no-padding">
+          <ion-item lines='none'>
+            <ion-label class="ion-no-margin">Ukupno: <span class="price-color">{{ total }} RSD</span></ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-end">
+        <ion-col size='6' size-sm='6' class="ion-no-padding">
+          <ion-button type='submit' color='medium' expand='block' [disabled]="form.invalid">Naruči</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

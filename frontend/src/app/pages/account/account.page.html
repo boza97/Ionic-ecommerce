@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Moj nalog</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="!isLoading" class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col size-sm='6' offset-sm='3' class="ion-no-padding">
+        <ion-list class="ion-no-padding">
+          <ion-item *ngIf="user" lines='none' class="ion-no-padding">
+            <ion-label class="ion-padding-horizontal ion-padding-top">Ime i prezime: {{user.firstName}}
+              {{user.lastName}}</ion-label>
+          </ion-item>
+          <ion-item lines='full' class="ion-no-padding">
+            <ion-label class="ion-padding-horizontal">E-mail: {{ user.email }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isLoading">
+      <ion-col size-sm='6' offset-sm='3' class="ion-text-center">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+
+    <ng-container *ngIf="!isLoading && form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-row class="ion-padding-horizontal">
+          <ion-col size-sm='4' offset-sm='4' class="ion-padding-horizontal">
+            <ion-list>
+              <ion-item>
+                <ion-label position='floating'>Grad</ion-label>
+                <ion-input type='text' formControlName="city"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="form.get('city').invalid && form.get('city').touched" lines='none'>
+                <ion-label color='danger'>Naziv grada mora sadržati samo slova.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-horizontal">
+          <ion-col size-sm='4' offset-sm='4' class="ion-padding-horizontal">
+            <ion-list>
+              <ion-item>
+                <ion-label position='floating'>Poštanski broj</ion-label>
+                <ion-input type='number' formControlName='cityCode'></ion-input>
+              </ion-item>
+              <ion-item *ngIf="form.get('cityCode').invalid && form.get('cityCode').touched" lines='none'>
+                <ion-label color='danger'>Poštanski broj nije validan.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-horizontal">
+          <ion-col size-sm='4' offset-sm='4' class="ion-padding-horizontal">
+            <ion-item>
+              <ion-label position='floating'>Adresa</ion-label>
+              <ion-input type='text' formControlName='address'></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-horizontal">
+          <ion-col size-sm='4' offset-sm='4' class="ion-padding-horizontal">
+            <ion-list>
+              <ion-item lines='none'>
+                <ion-label position='fixed'>Telefon</ion-label>
+                <ion-input type='text' placeholder='06#/#######' formControlName='mobileNumber'></ion-input>
+              </ion-item>
+              <ion-item *ngIf="form.get('mobileNumber').invalid && form.get('mobileNumber').touched" lines='none'>
+                <ion-label color='danger'>Broj telefona nije u zadatom formatu.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-horizontal">
+          <ion-col size-sm='4' offset-sm='4' class="ion-padding-horizontal">
+            <ion-button color='tertiary' expand='block' type='submit' [disabled]="form.invalid">Sačuvaj</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ng-container>
+  </ion-grid>
+</ion-content>

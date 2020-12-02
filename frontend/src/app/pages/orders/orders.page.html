@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Istorija kupovine</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <ion-grid *ngIf="isLoading">
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-text-center" size='12' size-md="6" ffset-md="3">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="!isLoading && loadedOrders.length === 0">
+    <ion-row>
+      <ion-col size-md="6" offset-md="3" class="ion-text-center">
+        <h4>Trenutno nemate nijednu narudžbinu.</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="!isLoading && loadedOrders.length > 0" class="ion-no-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-list class="ion-no-padding">
+        <ion-col class="ion-no-padding" size='12' size-xs='6' *ngFor="let order of loadedOrders">
+          <ion-item class="ion-no-padding" lines='full' (click)='onShowOrder(order.order_id)' button>
+            <div class="ion-text-left ion-padding-start">
+              <h5 class="font-weight-600 uppercase">Narudžbina br.{{ order.order_id }}</h5>
+              <p><b>Podaci: </b><span class="details-color">{{order.contact_name}},
+                  {{order.city_code}}-{{order.city}},
+                  {{order.address}}, {{order.phone}}</span>
+              </p>
+              <p><b>Ukupno: </b><span class="price-color">{{order.total.toFixed(2)}} RSD</span></p>
+              <p><b>Datum: </b><span class="details-color">{{order.created_at | date}}</span></p>
+            </div>
+          </ion-item>
+        </ion-col>
+      </ion-list>
+    </ion-row>
+  </ion-grid>
+</ion-content>
